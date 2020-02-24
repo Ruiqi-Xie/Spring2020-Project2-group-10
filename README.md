@@ -1,13 +1,8 @@
 # Project 2: Airbnb Exploration - Help you find the ideal house shiny app
 
-### [Project Description](doc/project2_desc.md)
-
 ![screenshot](doc/screenshot2.png)
 
-In this second project of GR5243 Applied Data Science, we develop a version 2.0 of an *Exploratory Data Analysis and Visualization* shiny app on a topic of your choice using [NYC Open Data](https://opendata.cityofnewyork.us/). See [Project 2 Description](doc/project2_desc.md) for more details.  
-
-
-## Airbnb Exploration - Help you find the ideal house
+### Airbnb Exploration - Help you find the ideal house
 Term: Spring 2020
 
 + Group 10
@@ -21,7 +16,7 @@ Term: Spring 2020
 + **Project summary**: 
 Airbnb has become one of the most popular platform for people to list, discover, and book accommodations around the world. People can find various types of houses through airbnb app. However, users can only see the internal pictures, the price per night, and the overall introduction of the house. They cannot clearly know the environment of the house like crime and restaurant situation. Also, users cannot search for multiple places at one time.
 
-Our shiny app is based on airbnb houses in NYC. It aims to help airbnb users who are totally new to NYC, and want to know more about their ideal houses and the rental situation in NYC. They can check the crime situation, restaurants around, the average price of different boroughs, the most expensive house in each area, etc.
+Our shiny app is based on airbnb houses in NYC, using data from [NYC Open Data](https://opendata.cityofnewyork.us/). It aims to help airbnb users who are totally new to NYC, and want to know more about their ideal houses and the rental situation in NYC. They can check the crime situation, restaurants around, the average price of different boroughs, the most expensive house in each area, etc.
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
