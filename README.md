@@ -1,34 +1,27 @@
-# Project 2: Shiny App Development Version 2.0
+# Project 2: Airbnb Exploration - Help you find the ideal house shiny app
 
 ### [Project Description](doc/project2_desc.md)
 
 ![screenshot](doc/screenshot2.png)
 
-In this second project of GR5243 Applied Data Science, we develop a version 2.0 of an *Exploratory Data Analysis and Visualization* shiny app on a topic of your choice using [NYC Open Data](https://opendata.cityofnewyork.us/) or U.S. government open data released on the [data.gov](https://data.gov/) website. See [Project 2 Description](doc/project2_desc.md) for more details.  
+In this second project of GR5243 Applied Data Science, we develop a version 2.0 of an *Exploratory Data Analysis and Visualization* shiny app on a topic of your choice using [NYC Open Data](https://opendata.cityofnewyork.us/). See [Project 2 Description](doc/project2_desc.md) for more details.  
 
-The **learning goals** for this project is:
 
-- business intelligence for data science
-- study legacy codes and further development
-- data cleaning
-- data visualization
-- systems development/design life cycle
-- shiny app/shiny server
+## Airbnb Exploration - Help you find the ideal house
+Term: Spring 2020
 
-*The above general statement about project 2 can be removed once you are finished with your project. It is optional.
++ Group 10
++ **Airbnb Exploration - Help you find the ideal house**:
+	+ Wang, Mengchen - mw3371
+	+ Wang, Yuyao - yw3395
+	+ Xie, Ruiqi - rx2171
+	+ Zhang, Qin - qz2387
+	+ Zhang, Xinlin - xz2863
 
-## Project Title Lorem ipsum dolor sit amet
-Term: Fall 2019
++ **Project summary**: 
+Airbnb has become one of the most popular platform for people to list, discover, and book accommodations around the world. People can find various types of houses through airbnb app. However, users can only see the internal pictures, the price per night, and the overall introduction of the house. They cannot clearly know the environment of the house like crime and restaurant situation. Also, users cannot search for multiple places at one time.
 
-+ Team #
-+ **Projec title**: + Team members
-	+ team member 1
-	+ team member 2
-	+ team member 3
-	+ team member 4
-	+ team member 5
-
-+ **Project summary**: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Our shiny app is based on airbnb houses in NYC. It aims to help airbnb users who are totally new to NYC, and want to know more about their ideal houses and the rental situation in NYC. They can check the crime situation, restaurants around, the average price of different boroughs, the most expensive house in each area, etc.
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
