@@ -4,10 +4,9 @@
 
 ### Airbnb Exploration - Help you find the ideal house
 
-+ **Project summary**: 
-Airbnb has become one of the most popular platform for people to list, discover, and book accommodations around the world. People can find various types of houses through airbnb app. However, users can only see the internal pictures, the price per night, and the overall introduction of the house. They cannot clearly know the environment of the house like crime and restaurant situation. Also, users cannot search for multiple places at one time. 
-
-Our shiny app is based on airbnb houses in NYC, using data from [NYC Open Data](https://opendata.cityofnewyork.us/). It aims to help airbnb users who are totally new to NYC, and want to know more about their ideal houses and the rental situation in NYC. They can check the crime situation, restaurants around, the average price of different boroughs, the most expensive house in each area, etc.
+**Project summary**: 
+	Airbnb has become one of the most popular platform for people to list, discover, and book accommodations around the world. People can find various types of houses through airbnb app. However, users can only see the internal pictures, the price per night, and the overall introduction of the house. They cannot clearly know the environment of the house like crime and restaurant situation. Also, users cannot search for multiple places at one time. 
+	Our shiny app is based on airbnb houses in NYC, using data from [NYC Open Data](https://opendata.cityofnewyork.us/). It aims to help airbnb users who are totally new to NYC, and want to know more about their ideal houses and the rental situation in NYC. They can check the crime situation, restaurants around, the average price of different boroughs, the most expensive house in each area, etc.
 
 + Term: Spring 2020
 + Group 10 - **Group Members**
@@ -16,6 +15,10 @@ Our shiny app is based on airbnb houses in NYC, using data from [NYC Open Data](
 	+ Xie, Ruiqi - rx2171
 	+ Zhang, Qin - qz2387
 	+ Zhang, Xinlin - xz2863
+
+**Project Shiny Link**
++ Shiny link: 
+
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
