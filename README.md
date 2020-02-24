@@ -18,7 +18,7 @@ Airbnb has become one of the most popular platform for people to list, discover,
 	+ Zhang, Xinlin - xz2863
 
 **Project Shiny Link**
-+ Shiny link: 
++ Shiny link: [](https://qinzhang.shinyapps.io/project2_airbnb/)
 
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
