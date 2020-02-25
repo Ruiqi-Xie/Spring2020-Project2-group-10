@@ -25,7 +25,11 @@ Airbnb has become one of the most popular platform for people to list, discover,
 
 
 ### Contribution statement: 
-([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
+Contribution statement: All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. Here's their statements:
+
+Mengchen Wang: "I finished the part of crime in the tab named "Environment" by designing the ui and server, and also the part of crime analysis in the tab named "Overview". "
+
+Xinlin Zhang: "I finished the part of restaurant in the tab named "Environment" by designing the ui and server, and also the part of restaurant analysis in the tab named "Overview" .
 
 
 
