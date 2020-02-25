@@ -1,1 +1,2 @@
 /Users/zhangxinlin/Desktop/ads/Spring2020-Project2-group-10/data/restaurant.csv[[:space:]] filter=lfs diff=lfs merge=lfs -text
+/Users/zhangxinlin/Desktop/ads/Spring2020-Project2-group-10/data/calendar.csv[[:space:]] filter=lfs diff=lfs merge=lfs -text
