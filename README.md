@@ -46,6 +46,12 @@ Contribution statement: All team members approve our work presented in this GitH
 **Qin Zhang**: "I finished the the tabs named "Home" and "Reference" and designed the web frame of the app. Also, I finished and contributed to the work of data cleaning, page designing, feature building for the tab named "Search" , and image interaction for the part of “Airbnb’s house” in the tab named “Overview” with teammate Xie, Ruiqi and Wang, Yuyao."
 
 
+
+### Project files
+
+To reproduce our shiny app, please download the app.R file in **app** folder, all the data files in the **data** folder, and the pictures inside the **doc/figs** folder.
+
+
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
 ```
