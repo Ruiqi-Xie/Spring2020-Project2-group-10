@@ -128,3 +128,303 @@ priceTS2=ggplot(price_data2, aes(month,mean_price, color = room_type))+
   theme(axis.line = element_blank()) + 
   theme(legend.position="bottom")
 
+server <- function(input, output,session) {
+  filtered_tab1 = reactive({
+    tab1_data %>%
+      filter(neighbourhood_group %in% input$neighborhood) %>%
+      filter(price.x >= input$price[1] & price.x <= input$price[2]) %>%
+      filter(room_type %in% input$roomtype) %>%
+      filter(start_date >= input$dateRange[1] & end_date <= input$dateRange[2])
+  })
+  
+  output$plot <- renderLeaflet({
+    tab1 = filtered_tab1()
+    leaflet(options = leafletOptions(minZoom = 8, maxZoom = 18)) %>%
+      addTiles() %>%
+      setView(lng = -74.00, lat = 40.71, zoom = 12) %>%
+      addMarkers(
+        lng = tab1$longitude,
+        lat = tab1$latitude,
+        popup = paste("ID:",tab1$id,"<br/>",
+                      "Price:",tab1$price.x, "<br/>",
+                      "Minimum nights:",tab1$minimum_nights.x, "<br/>"),
+        clusterOptions = markerClusterOptions()) %>%
+      addProviderTiles("CartoDB.Positron")
+  })
+  id_r <- reactive({input$id})
+  cuisine_type_r <- reactive({input$cuisine_type})
+  dist_r <- reactive({input$dist})
+  output$rplot <- renderLeaflet({
+    current_location <- airbnb %>% filter(id==id_r()) %>% dplyr::select(longitude,latitude)
+    filtered_restaurant <- restaurant %>% filter(CUISINE.DESCRIPTION %in% cuisine_type_r())
+    locations = as.matrix(cbind(filtered_restaurant$Longitude,filtered_restaurant$Latitude))
+    distances = distHaversine(locations, current_location)
+    data = filtered_restaurant[distances<dist_r()*1609.34,]
+    leaflet(data) %>%
+      addTiles() %>%
+      setView(lng = current_location$longitude, 
+              lat= current_location$latitude, 
+              zoom = 12) %>%
+      addMarkers(lng = ~current_location$longitude,
+                 lat = ~current_location$latitude, 
+                 popup = "Chosen House",
+                 icon = list(iconUrl = 'https://cdn2.iconfinder.com/data/icons/unigrid-phantom-buildings-vol-1/60/008_041_home_apartment_house_building_3-512.png'
+                             ,iconSize = c(25,25))
+      ) %>%
+      addCircles(lng = ~current_location$longitude,
+                 lat = ~current_location$latitude, 
+                 radius = dist_r()*1609.34) %>%
+      addMarkers(lng = ~Longitude, 
+                 lat = ~Latitude, 
+                 popup = paste(
+                   "Name:", data$DBA, "<br>",
+                   "Type:", data$CUISINE.DESCRIPTION
+                 ),
+                 icon=list(iconUrl = 'https://cdn2.iconfinder.com/data/icons/food-solid-icons-volume-1/128/030-512.png'
+                           ,iconSize = c(25,25)))%>%
+      addProviderTiles("CartoDB.Positron")
+    
+    
+  })
+  # define reactive
+  click_all_age_group_r <- reactive({input$click_all_age_group})
+  click_no_age_group_r <- reactive({input$click_no_age_group})
+  c.id_r <- reactive({input$c.id})
+  added_makers_r <- reactive({input$added_makers})
+  c.dist_r <- reactive({input$c.dist})
+  
+  observeEvent(click_all_age_group_r(), {
+    updateCheckboxGroupInput(session, "added_makers",
+                             choices = c("<18","18-24","25-44","45-64","65+","UNKNOWN"),
+                             selected = c("<18","18-24","25-44","45-64","65+","UNKNOWN"))
+  })
+  observeEvent(click_no_age_group_r(), {
+    updateCheckboxGroupInput(session, "added_makers",
+                             choices = c("<18","18-24","25-44","45-64","65+","UNKNOWN"),
+                             selected = NULL)
+  })
+  output$cplot <- renderLeaflet({
+    c.current_location <- airbnb %>% filter(id==c.id_r()) %>% dplyr::select(longitude,latitude)
+    filtered_crime <- crime %>% filter(VIC_AGE_GROUP %in% added_makers_r())
+    c.locations = as.matrix(cbind(filtered_crime$Longitude,filtered_crime$Latitude))
+    c.distances = distHaversine(c.locations, c.current_location)
+    c.data = filtered_crime[c.distances<c.dist_r()*1609.34,]
+    leaflet(c.data) %>%
+      addTiles() %>%
+      setView(lng = c.current_location$longitude, 
+              lat= c.current_location$latitude, 
+              zoom = 12) %>%
+      addMarkers(lng = ~c.current_location$longitude,
+                 lat = ~c.current_location$latitude, 
+                 popup = "Chosen House",
+                 icon = list(iconUrl = 'https://cdn2.iconfinder.com/data/icons/unigrid-phantom-buildings-vol-1/60/008_041_home_apartment_house_building_3-512.png'
+                             ,iconSize = c(25,25))) %>%
+      addCircles(lng = ~c.current_location$longitude,
+                 lat = ~c.current_location$latitude, 
+                 radius = c.dist_r()*1609.34) %>%
+      addMarkers(lng = ~Longitude, 
+                 lat = ~Latitude, 
+                 popup = paste(
+                   "Occur time: ", c.data$OCCUR_TIME, "<br>",
+                   "Victim Gender:", c.data$VIC_SEX,"<br>",
+                   "Victim Age:", c.data$VIC_AGE_GROUP
+                 ),
+                 icon=list(iconUrl = 'https://cdn0.iconfinder.com/data/icons/crime-investigation-basic-lineal-color/512/41_Revolver-512.png'
+                           ,iconSize = c(25,25)),
+                 clusterOptions = markerClusterOptions())%>%
+      addProviderTiles("CartoDB.Positron")
+    
+    
+  })
+  output$cplot <- renderLeaflet({
+    c.current_location <- airbnb %>% filter(id==input$c.id) %>% dplyr::select(longitude,latitude)
+    filtered_crime <- crime %>% filter(VIC_AGE_GROUP %in% input$added_makers)
+    c.locations = as.matrix(cbind(filtered_crime$Longitude,filtered_crime$Latitude))
+    c.distances = distHaversine(c.locations, c.current_location)
+    c.data = filtered_crime[c.distances<input$c.dist*1609.34,]
+    leaflet(c.data) %>%
+      addTiles() %>%
+      setView(lng = c.current_location$longitude, 
+              lat= c.current_location$latitude, 
+              zoom = 12) %>%
+      addMarkers(lng = ~c.current_location$longitude,
+                 lat = ~c.current_location$latitude, 
+                 popup = "Chosen House",
+                 icon = list(iconUrl = 'https://cdn2.iconfinder.com/data/icons/unigrid-phantom-buildings-vol-1/60/008_041_home_apartment_house_building_3-512.png'
+                             ,iconSize = c(25,25))) %>%
+      addCircles(lng = ~c.current_location$longitude,
+                 lat = ~c.current_location$latitude, 
+                 radius = input$c.dist*1609.34) %>%
+      addMarkers(lng = ~Longitude, 
+                 lat = ~Latitude, 
+                 popup = paste(
+                   "Occur time: ", c.data$OCCUR_TIME, "<br>",
+                   "Victim Gender:", c.data$VIC_SEX,"<br>",
+                   "Victim Age:", c.data$VIC_AGE_GROUP
+                 ),
+                 icon=list(iconUrl = 'https://cdn0.iconfinder.com/data/icons/crime-investigation-basic-lineal-color/512/41_Revolver-512.png'
+                           ,iconSize = c(30,30)),
+                 clusterOptions = markerClusterOptions())%>%
+      addProviderTiles("CartoDB.Positron")
+    
+    
+  })
+  # crime
+  colors <- c("#74d2e7", "#2dde98", "#ffc168", "#ff6c5f", "#8e43e7")
+  output$crime_pie <- renderPlotly({
+    crime_pie.data <- crime %>%
+      dplyr::group_by(BORO) %>%
+      dplyr::summarize(n=n()) %>%
+      arrange(BORO)
+    plot_ly() %>% add_pie(data = crime_pie.data, 
+                          labels = ~BORO, 
+                          values = ~n,
+                          name = names(crime_pie.data)[1],
+                          domain = list(row = 0, column = 0),
+                          marker = list(colors = colors))%>%
+      layout(plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+  })
+  output$crime_hist <- renderPlotly({
+    crime_hist.data <-
+      crime %>%
+      dplyr::mutate(month=month(OCCUR_DATE)) %>%
+      dplyr::select(INCIDENT_KEY,BORO,month) %>%
+      dplyr::group_by(month,BORO) %>%
+      dplyr::arrange(BORO)
+    plot_ly(crime_hist.data, x=~month, color=~BORO) %>%
+      add_histogram() %>%
+      layout(title="Histogram for crime in each month",
+             xaxis = list(title="Month",zeroline=F),
+             yaxis = list(title="Count",zeroline=F))%>%
+      layout(plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+  })
+  #grade_pie
+  # define reactive
+  grade_type_r <- reactive({input$grade_type})
+  cuisine_type.hist_r <- reactive({input$cuisine_type.hist})
+  output$grade <- renderPlotly({
+    restaurant_boro <- restaurant1 %>% 
+      dplyr::select(DBA, BORO, CUISINE.DESCRIPTION, GRADE) %>% 
+      dplyr::filter(GRADE != "", BORO != 0) %>%
+      dplyr::filter(CUISINE.DESCRIPTION %in% c("Japanese","American","Spanish","Italian","Korean",
+                                               "Chinese","French","Thai","Mexican","Indian")) %>%
+      dplyr::filter(GRADE != "P",GRADE != "N", GRADE != "Z") %>%
+      dplyr::group_by(BORO, GRADE) %>%
+      dplyr::summarise(count=n())
+    r_boro_a <- restaurant_boro %>%
+      dplyr::filter(GRADE=="A")
+    r_boro_b <- restaurant_boro %>%
+      dplyr::filter(GRADE=="B")
+    r_boro_c <- restaurant_boro %>%
+      dplyr::filter(GRADE=="C")
+    if(grade_type_r()=="A"){
+      plot_ly() %>% add_pie(data = r_boro_a, 
+                            labels = ~BORO, 
+                            values = ~count,
+                            name = names(restaurant_boro)[1],
+                            domain = list(row = 0, column = 0),
+                            marker = list(colors = colors))%>%
+        layout(plot_bgcolor='transparent') %>%
+        layout(paper_bgcolor='transparent')
+    }
+    else if(grade_type_r()=="B"){
+      plot_ly() %>% add_pie(data = r_boro_b, 
+                            labels = ~BORO, 
+                            values = ~count,
+                            name = names(restaurant_boro)[1],
+                            domain = list(row = 0, column = 0),
+                            marker = list(colors = colors))%>%
+        layout(plot_bgcolor='transparent') %>%
+        layout(paper_bgcolor='transparent')
+      
+    }
+    else if(grade_type_r()=="C"){
+      plot_ly() %>% add_pie(data = r_boro_c, 
+                            labels = ~BORO, 
+                            values = ~count,
+                            name = names(restaurant_boro)[1],
+                            domain = list(row = 0, column = 0),
+                            marker = list(colors = colors))%>%
+        layout(plot_bgcolor='transparent') %>%
+        layout(paper_bgcolor='transparent')
+    }
+  })
+  filtered_tab3_area_1 = reactive({
+    tab3_data_expensive %>%
+      filter(neighbourhood_group == input$tab3_neighborhood) %>%
+      select(id, price) 
+  })
+  output$area_plot_1  = renderPlotly({
+    tab3_area_1 = filtered_tab3_area_1()
+    a = ggplot(tab3_area_1, aes(x = id, y=price))+
+      geom_bar(stat = "identity", fill = "#fd5c63") + 
+      ggtitle("Top 10 expensive hourse's id") +
+      coord_flip() +
+      theme_classic() + 
+      theme(axis.line = element_blank()) + 
+      xlab("ID of house") +
+      ylab("Price")
+    fig_a = ggplotly(a) %>%
+      layout(showlegend = FALSE, plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+  })
+  filtered_tab3_area_2 = reactive({
+    tab3_data_cheap %>%
+      filter(neighbourhood_group == input$tab3_neighborhood) %>%
+      select(id, price)
+  })
+  output$area_plot_2  = renderPlotly({
+    tab3_area_2 = filtered_tab3_area_2()
+    b = ggplot(tab3_area_2, aes(x = id, y=price))+
+      geom_bar(stat = "identity", fill = "#fd5c63") + 
+      ggtitle("Top 10 cheap hourse's id") +
+      coord_flip() +
+      theme_classic() + 
+      theme(axis.line = element_blank()) + 
+      xlab("ID of house") +
+      ylab("Price")
+    fig_b = ggplotly(b) %>% 
+      layout(showlegend = FALSE, plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+  })
+  output$price_neighborhood<- renderPlotly({
+    ggplotly(priceTS) %>%
+      layout(legend = list(bgcolor = "transparent",
+                           bordercolor = "transparent")) %>%
+      layout(plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+  })
+  output$price_roomtype<- renderPlotly({
+    ggplotly(priceTS2) %>%
+      layout(legend = list(bgcolor = "transparent",
+                           bordercolor = "transparent")) %>%
+      layout(plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+  })
+  output$restaurant_cuisine <- renderPlotly({
+    restaurant_cuisine.data <-  restaurant1 %>% 
+      dplyr::select(DBA, BORO, CUISINE.DESCRIPTION, GRADE) %>% 
+      dplyr::filter(GRADE != "", BORO != 0) %>% 
+      dplyr::select(BORO,CUISINE.DESCRIPTION) %>%
+      dplyr::filter(CUISINE.DESCRIPTION %in% c("Japanese","American","Spanish","Italian","Korean",
+                                               "Chinese","French","Thai","Mexican","Indian")) %>%
+      dplyr::filter(CUISINE.DESCRIPTION %in% cuisine_type.hist_r()) %>%
+      dplyr::group_by(CUISINE.DESCRIPTION,BORO) %>%
+      dplyr::summarise(n=n())
+    plot_ly(restaurant_cuisine.data, x=~BORO, y=~n,marker = list(color = "fd5c63")) %>%
+      add_bars() %>%
+      layout(title="The number of restaurant in each Boro",
+             xaxis = list(title="BORO",zeroline=F),
+             yaxis = list(title="Count",zeroline=F)) %>%
+      layout(showlegend = FALSE, plot_bgcolor='transparent') %>%
+      layout(paper_bgcolor='transparent')
+    
+  })
+}
+
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
