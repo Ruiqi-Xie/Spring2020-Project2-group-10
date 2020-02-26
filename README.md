@@ -33,7 +33,7 @@ Airbnb has become one of the most popular platform for people to list, discover,
 
 
 ### Contribution statement: 
-Contribution statement: All team members approve our work presented in this GitHub repository including this contributions statement. Here's their statements:
+Contribution statement: All team members approve our work presented in this GitHub repository including this contributions statement. Here's our statements:
 
 **Mengchen Wang**: "I finished the part of crime in the tab named "Environment" by designing the ui and server, and also the part of NYC's crime analysis in the tab named "Overview". "
 
