@@ -1,20 +1,14 @@
 ### A Note on Contributions
 
-Whenever we have team projects, there are always concerns on unequal contributions from members of a project team. In the ideal world, we are all here to put in our best efforts and learn together. Even in that ideal world, we have different skill sets and preparations, and we will still contribute differently to a project. 
+### Contribution statement: 
+Contribution statement: All team members approve our work presented in this GitHub repository including this contributions statement. Here's their statements:
 
-Therefore, you are required to post a *contribution statement* in the root README.md of your GitHub repo. Please beware that your GitHub repo will become public and remain public after the due date of the projects. 
+**Mengchen Wang**: "I finished the part of crime in the tab named "Environment" by designing the ui and server, and also the part of NYC's crime analysis in the tab named "Overview". "
 
-Post your title, team members, project abstract and a contribution statement in the README.md file.  This is a common practice for research scientific journals. 
+**Yuyao Wang**: "I finished and contributed to the work of data cleaning, page designing, feature building for the tab named "Search" , and image interaction for the part of “Airbnb’s house” in the tab named “Overview” with teammate Xie, Ruiqi and Zhang, Qin.”
 
-Below is an example. If no contribution statement is provided, we will insert a default statement that goes "**All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement**. "
+**Ruiqi Xie**: "I finished and contributed to the work of data cleaning, page designing, feature building for the tab named "Search", and image interaction for the part of “Airbnb’s house” in the tab named “Overview”  with teammate Wang, Yuyao and Zhang, Qin.”
 
----
-Sample project README statement.
+**Xinlin Zhang**: "I finished the part of restaurant in the tab named "Environment" by designing the ui and server, and also contributed to the part of analyzing the restaurants in New York City in the tab named "Overview".
 
-Project xxx
-
-Team members: Avi Bond, Comma Deed, En Funn, Gem Hon
-
-Summary: In this project, we developed a new method and improved the classification accuracy for images of cats and dogs to 99.9%
-
-[Contribution Statement] AB, CD, EF and GH designed the study. AB and CD developed baseline classification model for evaluation. EF and GH explored feature engineering for improving the baseline model. AB, EF and GH discussed and designed the model evaluation protocol. CD carried out the computation for model evaluation. All team members contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.
+**Qin Zhang**: "I finished the the tabs named "Home" and "Reference" and designed the web frame of the app. Also, I finished and contributed to the work of data cleaning, page designing, feature building for the tab named "Search" , and image interaction for the part of “Airbnb’s house” in the tab named “Overview” with teammate Xie, Ruiqi and Wang, Yuyao."
