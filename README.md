@@ -1,6 +1,6 @@
 # Project 2: Airbnb Exploration - Help you find the ideal house shiny app
 
-![screenshot](doc/screenshot2.png)
+![screenshot](doc/figs/airbnb.jpg)
 
 ## Airbnb Exploration - Help you find the ideal house
 
